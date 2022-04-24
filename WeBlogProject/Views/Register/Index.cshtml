@@ -1,0 +1,83 @@
+﻿@model RegisterDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@section css {
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Register Now</h3>
+        <div class="inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                <form action="/Register/RegisterUser" method="post">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="nickname">Nick Name</label>
+                            <input type="text" class="form-control" asp-for="UserNickName" id="nickname" placeholder="Nick Name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" asp-for="UserName" id="name" placeholder="Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lname">Last Name</label>
+                            <input type="text" class="form-control" asp-for="UserSurName" id="lname" placeholder="Last Name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" asp-for="UserMail" id="email" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="p1" class="mb-2">Password</label>
+                            <input type="password" asp-for="UserPassword1" class="form-control" id="p1" placeholder="Password 1" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="p2" class="mb-2">Confirm Password</label>
+                            <input type="password" asp-for="UserPassword2" class="form-control" id="p2" placeholder="Password 2" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4">Register</button>
+                    <p>
+                        <a class="text-info" onclick="terms()">By clicking Signup, I agree to your terms</a>
+                    </p>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        function terms() {
+            const { value: accept } = Swal.fire({
+                title: 'Terms and conditions',
+                input: 'checkbox',
+                inputValue: 1,
+                inputPlaceholder:
+                    'I agree with the terms and conditions',
+                confirmButtonText:
+                    'Continue <i class="fa fa-arrow-right"></i>',
+                inputValidator: (result) => {
+                    if (!result) {
+                        return 'You need to agree with Terms and Conditions!';
+                    }
+                    else {
+                        Swal.fire(`<h3>You agreed with our Terms and Conditions!</h3> <br /> <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h6>`);
+                    }
+                }
+            })
+        }
+    </script>
+}
